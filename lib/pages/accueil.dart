@@ -24,6 +24,8 @@ class _HomePage extends State<HomePage> {
         currentPage = const Scan();
       case 2:
         currentPage = const Generer();
+      // case 3:
+      //   currentPage = const Generer();
       default:
         throw UnimplementedError('No widget for an index of $currentIndex');
     }
@@ -45,6 +47,7 @@ class _HomePage extends State<HomePage> {
                 Expanded(child: mainArea),
                 SafeArea(
                     child: BottomNavigationBar(
+                  // fixedColor: colorScheme.onSecondaryContainer,
                   items: const [
                     BottomNavigationBarItem(
                       icon: Icon(Icons.home),
@@ -57,7 +60,11 @@ class _HomePage extends State<HomePage> {
                     BottomNavigationBarItem(
                       icon: Icon(Icons.edit),
                       label: 'Generate',
-                    )
+                    ),
+                    // BottomNavigationBarItem(
+                    //   icon: Icon(Icons.history),
+                    //   label: 'History',
+                    // ),
                   ],
                   currentIndex: currentIndex,
                   onTap: (value) {
@@ -87,6 +94,10 @@ class _HomePage extends State<HomePage> {
                         icon: Icon(Icons.edit),
                         label: Text('Generate'),
                       ),
+                      // NavigationRailDestination(
+                      //   icon: Icon(Icons.history),
+                      //   label: Text('History'),
+                      // ),
                     ],
                     selectedIndex: currentIndex,
                     onDestinationSelected: (value) {

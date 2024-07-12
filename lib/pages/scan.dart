@@ -57,9 +57,21 @@ class _Scan extends State<Scan> {
             flex: 1,
             child: Center(
               child: (result != null)
-                  ? Text(
-                      'Barcode Type: ${describeIdentity(result!.format)} \n Data: ${result!.code}')
-                  : const Text('Scan a code-='),
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                            'Barcode Type: ${describeIdentity(result!.format)}'),
+                        const SizedBox(height: 20),
+                        Text(
+                          'Data: ${result!.code}',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    )
+                  : const Text('Scan a code...'),
             ))
       ],
     ));
