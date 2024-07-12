@@ -29,7 +29,7 @@ class _HomePage extends State<HomePage> {
     }
 
     var mainArea = ColoredBox(
-      color: colorScheme.surfaceVariant,
+      color: colorScheme.surfaceContainerHighest,
       child: AnimatedSwitcher(
         duration: const Duration(milliseconds: 200),
         child: currentPage,

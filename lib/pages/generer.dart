@@ -7,13 +7,27 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
 
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: Generate(),
+    );
+  }
+}
+
 class Generate extends StatelessWidget {
   const Generate({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Générateur de QR Code'),
+      ),
+      body: const Center(
         child: TextForm(),
       ),
     );
@@ -45,18 +59,21 @@ class _TextFormState extends State<TextForm> {
   }
 
   Future<void> _saveQRCode() async {
-    if (await Permission.storage.request().isGranted) {
+    var status = await Permission.storage.status;
+    if (!status.isGranted) {
+      await Permission.storage.request();
+    }
+
+    if (await Permission.storage.isGranted) {
       final directory = await getExternalStorageDirectory();
       final filePath = '${directory!.path}/qr_code.png';
-      _screenshotController
-          .captureAndSave(directory.path, fileName: "qr_code.png")
-          .then((File? image) {
-            if (image != null) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('QR Code enregistré à $filePath')),
-              );
-            }
-          } as FutureOr Function(String? value));
+      _screenshotController.captureAndSave(directory.path, fileName: "qr_code.png").then((File? image) {
+        if (image != null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('QR Code enregistré à $filePath')),
+          );
+        }
+      } as FutureOr Function(String? value));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Permission de stockage refusée')),
@@ -91,7 +108,6 @@ class _TextFormState extends State<TextForm> {
                 data: _inputText,
                 version: QrVersions.auto,
                 size: 200.0,
-                backgroundColor: Colors.white,
               ),
             ),
           const SizedBox(height: 20),
