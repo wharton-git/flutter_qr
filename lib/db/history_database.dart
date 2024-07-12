@@ -1,5 +1,6 @@
 import 'package:flutter_base_project/db/history_field.dart';
 import 'package:flutter_base_project/db/history_model.dart';
+import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 /// Class to manage the history database
@@ -34,7 +35,7 @@ class HistoryDatabase {
   /// @return Future<Database> The instance of the database
   Future<Database> _initDatabase() async {
     final databasePath = await getDatabasesPath();
-    final path = '$databasePath/history.db';
+    final path = join(databasePath, 'history.db');
     return await openDatabase(
       path,
       version: 1,

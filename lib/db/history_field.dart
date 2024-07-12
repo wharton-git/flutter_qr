@@ -7,7 +7,7 @@ class HistoryField {
 
   static const String idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
   static const String dataType = 'TEXT NOT NULL';
-  static const String statusType = "TEXT NOT NULL CHECK('type' IN ('SCANNED', 'GENERATED'))";
+  static const String statusType = "TEXT NOT NULL CHECK(status IN ('SCANNED', 'GENERATED'))";
   static const String createdAtType = 'DATETIME NOT NULL';
 
   static const List<String> values = [
