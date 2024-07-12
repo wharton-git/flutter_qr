@@ -23,9 +23,7 @@ class _HomePage extends State<HomePage> {
       case 1:
         currentPage = const Scan();
       case 2:
-        currentPage = const Generer();
-      // case 3:
-      //   currentPage = const Generer();
+        currentPage = const Generate();
       default:
         throw UnimplementedError('No widget for an index of $currentIndex');
     }
