@@ -19,8 +19,10 @@ class _HomePage extends State<HomePage> {
     Widget currentPage;
     switch (currentIndex) {
       case 0:
-        currentPage = const Scan();
+        currentPage = const Home();
       case 1:
+        currentPage = const Scan();
+      case 2:
         currentPage = const Generer();
       default:
         throw UnimplementedError('No widget for an index of $currentIndex');
@@ -44,6 +46,10 @@ class _HomePage extends State<HomePage> {
                 SafeArea(
                     child: BottomNavigationBar(
                   items: const [
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.home),
+                      label: 'Home',
+                    ),
                     BottomNavigationBarItem(
                       icon: Icon(Icons.qr_code_scanner),
                       label: 'Scan',
@@ -70,6 +76,10 @@ class _HomePage extends State<HomePage> {
                     extended: constraints.maxWidth >= 600,
                     destinations: const [
                       NavigationRailDestination(
+                        icon: Icon(Icons.home),
+                        label: Text('Home'),
+                      ),
+                      NavigationRailDestination(
                         icon: Icon(Icons.qr_code_scanner),
                         label: Text('Scan'),
                       ),
@@ -91,6 +101,23 @@ class _HomePage extends State<HomePage> {
             );
           }
         },
+      ),
+    );
+  }
+}
+
+class Home extends StatelessWidget {
+  const Home({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: SafeArea(
+        child: Expanded(
+          child: Center(
+            child: Text('Welcome to QR-Scanner'),
+          ),
+        ),
       ),
     );
   }
