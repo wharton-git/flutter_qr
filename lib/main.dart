@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_project/pages/login_form.dart';
-// import 'package:uno/uno.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
       ),
       home: const LoginForm(),
       darkTheme: ThemeData(
-          colorScheme: const ColorScheme.dark(background: Colors.black)),
+          colorScheme: const ColorScheme.dark(surface: Colors.black)),
     );
   }
 }

@@ -9,7 +9,8 @@ environment:
 dependencies:
     flutter:
         sdk: flutter
-
+    sqflite: any
+    path: any
     cupertino_icons: ^1.0.6
     uno: ^1.1.10
     flutter_form_builder: ^9.2.1
