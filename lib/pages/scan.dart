@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class Scan extends StatefulWidget {
@@ -15,6 +16,7 @@ class _Scan extends State<Scan> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result;
   QRViewController? controller;
+  // Barcode? value;
 
   void _onQRViewCreated(QRViewController contr) {
     controller = contr;
@@ -23,6 +25,20 @@ class _Scan extends State<Scan> {
         result = scanData;
       });
     });
+  }
+
+  void _copy() {
+    if (result?.code != null) {
+      var value = result?.code;
+      Clipboard.setData(ClipboardData(text: value!));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Texte copié')),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Veuillez scanner un code d\'abord')),
+      );
+    }
   }
 
   @override
@@ -47,7 +63,7 @@ class _Scan extends State<Scan> {
         body: Column(
       children: [
         Expanded(
-          flex: 5,
+          flex: 2,
           child: QRView(
             key: qrKey,
             onQRViewCreated: _onQRViewCreated,
@@ -60,6 +76,26 @@ class _Scan extends State<Scan> {
                   ? Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton.icon(
+                              icon: const Icon(Icons.flash_on),
+                              label: const Text('Flash'),
+                              onPressed: () {},
+                            ),
+                            const SizedBox(width: 30),
+                            ElevatedButton.icon(
+                              icon: const Icon(Icons.copy),
+                              label: const Text('Copy'),
+                              onPressed: () {
+                                _copy();
+                              },
+                            ),
+                            // ElevatedButton(),
+                          ],
+                        ),
+                        const SizedBox(height: 50),
                         Text(
                             'Barcode Type: ${describeIdentity(result!.format)}'),
                         const SizedBox(height: 20),

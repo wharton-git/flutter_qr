@@ -126,8 +126,20 @@ class Home extends StatelessWidget {
       body: SafeArea(
         child: Expanded(
           child: Center(
-            child: Text('Welcome to QR-Scanner'),
-          ),
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Welcome to QR-Scanner',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              SizedBox(height: 40),
+              Text('Made by awesome people',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+              SizedBox(height: 20),
+              Text('Wharton'),
+              Text('Mandrindra'),
+              Text('Dzyanino')
+            ],
+          )),
         ),
       ),
     );
